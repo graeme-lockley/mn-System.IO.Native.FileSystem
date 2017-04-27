@@ -32,7 +32,22 @@ const readFile = fileName => denodeify(cb => FS.readFile(fileName, {encoding: "u
 const readdir = directory => denodeify(cb => FS.readdir(directory, cb));
 
 
+const open = fileName => options =>
+    denodeify(cb => FS.open(fileName, options, cb));
+
+
+const futimes = atime => mtime => fileDescriptor =>
+    denodeify(cb => FS.futimes(fileDescriptor, atime, mtime, cb));
+
+
+const close = fileDescriptor =>
+    denodeify(cb => FS.close(fileDescriptor, cb));
+
+
 module.exports = {
+    close,
+    futimes,
+    open,
     readdir,
     readFile,
     stat
