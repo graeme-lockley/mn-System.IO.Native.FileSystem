@@ -47,11 +47,16 @@ const close = fileDescriptor =>
     denodeify(cb => FS.close(fileDescriptor, cb));
 
 
+const writeFile = fileName => content =>
+    denodeify(cb => FS.writeFile(fileName, content, {encoding: "utf8"}, cb));
+
+
 module.exports = {
     close,
     futimes,
     open,
     readdir,
     readFile,
-    stat
+    stat,
+    writeFile
 };
